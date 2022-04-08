@@ -18,16 +18,16 @@
         android:theme="@style/Theme.ProyectoFinal"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".HomeEstudiante"
+            android:name=".ui.HomeProfesor"
             android:exported="false" />
         <activity
-            android:name=".HomeProfesor"
+            android:name=".ui.HomeEstudiante"
             android:exported="false" />
         <activity
-            android:name=".Login"
+            android:name=".ui.Login"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="true"
             android:theme="@style/SplashTheme">
             <intent-filter>
