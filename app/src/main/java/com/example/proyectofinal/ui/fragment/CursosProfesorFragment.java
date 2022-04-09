@@ -22,9 +22,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.proyectofinal.ui.HomeProfesorAddNotify;
+import com.example.proyectofinal.HomeProfesorCursoDetalle;
+import com.example.proyectofinal.HomeProfesorCursoEstudiantes;
 import com.example.proyectofinal.MyUtils;
 import com.example.proyectofinal.R;
+import com.example.proyectofinal.ui.HomeProfesorAddNotify;
+import com.example.proyectofinal.ui.adapter.CustomClaseProfesorAdapter;
 import com.example.proyectofinal.ui.adapter.CustomNotifyProfesorAdapter;
 
 import org.json.JSONArray;
@@ -34,25 +37,15 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
-public class NotifyProfesorFragment extends Fragment {
+public class CursosProfesorFragment extends Fragment {
     private RequestQueue mQueue;
-    private Button btnHomeProfesorAddNovedad;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.home_profesor_notify_fragment,container,false);
-        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.home_profesor_cursos_fragment,container,false);
+        RecyclerView recyclerView = view.findViewById(R.id.recyclerViewHomeProfesorCursos);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
-
-        btnHomeProfesorAddNovedad = (Button) view.findViewById(R.id.btn_home_profesor_add_novedad);
-
-        btnHomeProfesorAddNovedad.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getContext(), HomeProfesorAddNotify.class);
-                startActivity(intent);
-            }
-        });
 
         try {
             ArrayList<String> novedades = new ArrayList<>();
@@ -64,7 +57,7 @@ public class NotifyProfesorFragment extends Fragment {
 
             StringRequest stringRequest = new StringRequest(
                     Request.Method.POST,
-                    MyUtils.API_URL + "profesor/novedades_clase",
+                    MyUtils.API_URL + "profesor/clases",
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
@@ -74,7 +67,7 @@ public class NotifyProfesorFragment extends Fragment {
                                     novedades.add(jsonResponse.getString(i));
                                 }
 
-                                recyclerView.setAdapter(new CustomNotifyProfesorAdapter(novedades));
+                                recyclerView.setAdapter(new CustomClaseProfesorAdapter(novedades));
 
                             } catch (JSONException e) {
                                 e.printStackTrace();

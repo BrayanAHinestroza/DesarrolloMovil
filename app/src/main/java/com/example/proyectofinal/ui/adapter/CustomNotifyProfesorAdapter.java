@@ -26,7 +26,7 @@ public class CustomNotifyProfesorAdapter extends RecyclerView.Adapter<CustomNoti
 
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_profesor_home_notify, parent, false));
+        return new MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_home_profesor_notify, parent, false));
     }
 
     @Override

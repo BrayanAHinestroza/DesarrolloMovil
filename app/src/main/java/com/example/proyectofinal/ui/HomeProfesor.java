@@ -1,5 +1,6 @@
 package com.example.proyectofinal.ui;
 
+import com.example.proyectofinal.ui.fragment.CursosProfesorFragment;
 import com.example.proyectofinal.ui.fragment.NotifyProfesorFragment;
 import com.example.proyectofinal.ui.fragment.HomeProfesorFragment;
 import com.example.proyectofinal.R;
@@ -50,7 +51,7 @@ public class HomeProfesor extends AppCompatActivity {
                         fragment = new NotifyProfesorFragment();
                         break;
                     case 1:
-                        fragment = new HomeProfesorFragment();
+                        fragment = new CursosProfesorFragment();
                         break;
 //                    case 2:
 //                        fragment = new HomeProfesorFragment();
