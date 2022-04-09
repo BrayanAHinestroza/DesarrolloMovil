@@ -41,7 +41,7 @@ public class NotifyProfesorFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.home_profesor_notify_fragment,container,false);
-        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
+        RecyclerView recyclerView = view.findViewById(R.id.recyclerViewHomeProfesorCursos);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         btnHomeProfesorAddNovedad = (Button) view.findViewById(R.id.btn_home_profesor_add_novedad);

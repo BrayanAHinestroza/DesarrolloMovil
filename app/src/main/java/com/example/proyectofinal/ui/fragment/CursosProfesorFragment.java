@@ -1,12 +1,10 @@
 package com.example.proyectofinal.ui.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,13 +20,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.proyectofinal.HomeProfesorCursoDetalle;
-import com.example.proyectofinal.HomeProfesorCursoEstudiantes;
 import com.example.proyectofinal.MyUtils;
 import com.example.proyectofinal.R;
-import com.example.proyectofinal.ui.HomeProfesorAddNotify;
 import com.example.proyectofinal.ui.adapter.CustomClaseProfesorAdapter;
-import com.example.proyectofinal.ui.adapter.CustomNotifyProfesorAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -48,7 +42,7 @@ public class CursosProfesorFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         try {
-            ArrayList<String> novedades = new ArrayList<>();
+            ArrayList<String> cursos = new ArrayList<>();
             String token = MyUtils.obtenerToken(getContext());
             JSONObject data = new JSONObject();
             data.put("token", token);
@@ -64,11 +58,9 @@ public class CursosProfesorFragment extends Fragment {
                             try {
                                 JSONArray jsonResponse = new JSONArray(response);
                                 for(int i = 0; i < jsonResponse.length(); i++){
-                                    novedades.add(jsonResponse.getString(i));
+                                    cursos.add(jsonResponse.getString(i));
                                 }
-
-                                recyclerView.setAdapter(new CustomClaseProfesorAdapter(novedades));
-
+                                recyclerView.setAdapter(new CustomClaseProfesorAdapter(cursos));
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -99,7 +91,6 @@ public class CursosProfesorFragment extends Fragment {
             mQueue.add(stringRequest);
 
         } catch (JSONException e) {
-            System.out.println("HERE ->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
             e.printStackTrace();
         }
         return view;

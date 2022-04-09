@@ -53,9 +53,9 @@ public class HomeProfesor extends AppCompatActivity {
                     case 1:
                         fragment = new CursosProfesorFragment();
                         break;
-//                    case 2:
-//                        fragment = new HomeProfesorFragment();
-//                        break;
+                    case 2:
+                        fragment = new HomeProfesorFragment();
+                        break;
                 }
                 FragmentManager fm = getSupportFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
