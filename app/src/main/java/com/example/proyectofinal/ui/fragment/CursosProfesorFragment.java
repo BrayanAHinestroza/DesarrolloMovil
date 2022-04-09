@@ -99,6 +99,7 @@ public class CursosProfesorFragment extends Fragment {
             mQueue.add(stringRequest);
 
         } catch (JSONException e) {
+            System.out.println("HERE ->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
             e.printStackTrace();
         }
         return view;

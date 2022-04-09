@@ -52,8 +52,13 @@ public class CustomClaseProfesorAdapter extends RecyclerView.Adapter<CustomClase
             holder.btnHomeProfesorCursoDetalle.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(holder.btnHomeProfesorCursoDetalle.getContext(), HomeProfesorCursoDetalle.class);
-                    view.getContext().startActivity(intent);
+                    try {
+                        Intent intent = new Intent(holder.btnHomeProfesorCursoDetalle.getContext(), HomeProfesorCursoDetalle.class);
+                        intent.putExtra("id_curso", data.getString("id_curso"));
+                        view.getContext().startActivity(intent);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
             });
 
