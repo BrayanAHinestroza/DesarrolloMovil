@@ -31,7 +31,7 @@ import java.util.regex.Pattern;
 public class Login extends AppCompatActivity {
     private EditText edtUsername, edtPassword;
     private RequestQueue mQueue;
-    private static final String API_URL = "http://192.168.1.78:5000/";
+    public static final String API_URL = "http://192.168.1.78:5000/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

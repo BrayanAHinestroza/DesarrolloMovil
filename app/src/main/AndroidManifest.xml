@@ -18,6 +18,10 @@
         android:theme="@style/Theme.ProyectoFinal"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".HomeProfesorAddNotify"
+            android:exported="false"
+            android:parentActivityName=".ui.HomeProfesor"/>
+        <activity
             android:name=".ui.HomeProfesor"
             android:exported="false" />
         <activity
