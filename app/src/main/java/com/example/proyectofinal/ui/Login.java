@@ -82,6 +82,7 @@ public class Login extends AppCompatActivity {
                             ContentValues registro = new ContentValues();
                             registro.put("rol", rol);
                             registro.put("token", token);
+                            registro.put("username", username.toUpperCase());
                             MyUtils.guardarEnBaseDeDatos(Login.this, registro);
 
                             if (rol.equals("2")){

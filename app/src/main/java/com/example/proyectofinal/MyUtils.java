@@ -39,8 +39,20 @@ public class MyUtils {
 
         Cursor fila = bd.rawQuery("select * from auth", null);
         if(fila.moveToFirst()){
-            rol = fila.getString(2);
+            rol = fila.getString(1);
         }
         return rol;
+    }
+
+    public static String obtenerUsername(Context context){
+        String username = "";
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(context, "proyecto_final",null, 1);
+        SQLiteDatabase bd = admin.getWritableDatabase();
+
+        Cursor fila = bd.rawQuery("select * from auth", null);
+        if(fila.moveToFirst()){
+            username = fila.getString(2);
+        }
+        return username;
     }
 }

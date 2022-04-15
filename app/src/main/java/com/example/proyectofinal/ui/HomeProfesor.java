@@ -1,5 +1,6 @@
 package com.example.proyectofinal.ui;
 
+import com.example.proyectofinal.MyUtils;
 import com.example.proyectofinal.ui.fragment.CursosProfesorFragment;
 import com.example.proyectofinal.ui.fragment.NotifyProfesorFragment;
 import com.example.proyectofinal.ui.fragment.HomeProfesorFragment;
@@ -11,6 +12,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 public class HomeProfesor extends AppCompatActivity {
 
@@ -19,11 +21,15 @@ public class HomeProfesor extends AppCompatActivity {
     Fragment fragment = null;
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
+    TextView tvUsername;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_profesor);
+
+        tvUsername = (TextView) findViewById(R.id.tvUsername);
+        tvUsername.setText(MyUtils.obtenerUsername(this));
 
 //        FrameLayout layout = new FrameLayout(this);
 //        layout.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
