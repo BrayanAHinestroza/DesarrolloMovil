@@ -18,21 +18,24 @@
         android:theme="@style/Theme.ProyectoFinal"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".DetalleEstudiante"
+            android:exported="false" />
+        <activity
             android:name=".HomeProfesorCursoDetalle"
             android:exported="false"
-            android:parentActivityName=".ui.HomeProfesor"/>
+            android:parentActivityName=".ui.HomeProfesor" />
         <activity
             android:name=".HomeProfesorCursoEstudiantes"
             android:exported="false"
-            android:parentActivityName=".ui.HomeProfesor"/>
+            android:parentActivityName=".ui.HomeProfesor" />
         <activity
             android:name=".ui.HomeProfesorAddNotify"
             android:exported="false"
             android:parentActivityName=".ui.HomeProfesor" />
         <activity
-            android:label="SGC - Página de Inicio"
             android:name=".ui.HomeProfesor"
-            android:exported="false" />
+            android:exported="false"
+            android:label="SGC - Página de Inicio" />
         <activity
             android:name=".ui.HomeEstudiante"
             android:exported="false" />
