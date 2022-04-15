@@ -31,7 +31,6 @@ import java.util.regex.Pattern;
 public class Login extends AppCompatActivity {
     private EditText edtUsername, edtPassword;
     private RequestQueue mQueue;
-    public static final String API_URL = "http://192.168.1.78:5000/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,10 +52,8 @@ public class Login extends AppCompatActivity {
             if (response.getBoolean("status")){
                 iniciarSesion(username, password);
             }else{
-                System.out.println(response.getString("message").toString());
+                Toast.makeText(Login.this,"ERROR: " + response.getString("message").toString(),Toast.LENGTH_LONG).show();
             }
-            Boolean prueba = response.getBoolean("status");
-            System.out.println(prueba);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -71,31 +68,44 @@ public class Login extends AppCompatActivity {
 
         StringRequest stringRequest = new StringRequest(
             Request.Method.POST,
-            API_URL + "Login",
+                MyUtils.API_URL + "Login",
             new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     try {
                         JSONObject jsonResponse = new JSONObject(response);
-                        String rol = jsonResponse.getString("roles_id").toString();
-                        String token = jsonResponse.getString("token").toString();
 
-                        ContentValues registro = new ContentValues();
-                        registro.put("rol", rol);
-                        registro.put("token", token);
-                        MyUtils.guardarEnBaseDeDatos(Login.this, registro);
+                        if (jsonResponse.getInt("code") == 1) {
+                            String rol = jsonResponse.getString("roles_id").toString();
+                            String token = jsonResponse.getString("token").toString();
 
-                        if (rol.equals("2")){
-                            Intent intent = new Intent(Login.this, HomeEstudiante.class);
-                            startActivity(intent);
-                        }else if (rol.equals("3")){
-                            Intent intent = new Intent(Login.this, HomeProfesor.class);
-                            startActivity(intent);
+                            ContentValues registro = new ContentValues();
+                            registro.put("rol", rol);
+                            registro.put("token", token);
+                            MyUtils.guardarEnBaseDeDatos(Login.this, registro);
+
+                            if (rol.equals("2")){
+                                Intent intent = new Intent(Login.this, HomeEstudiante.class);
+                                startActivity(intent);
+                            }else if (rol.equals("3")){
+                                Intent intent = new Intent(Login.this, HomeProfesor.class);
+                                startActivity(intent);
+                            }
+                            Toast.makeText(Login.this,"BIENVENIDO: " + username,Toast.LENGTH_LONG).show();
                         }
+
+                        if (jsonResponse.getInt("code") == 2){
+                            Toast.makeText(Login.this,"ERROR: " + jsonResponse.getString("message").toString(),Toast.LENGTH_LONG).show();
+                        }
+
+                        if (jsonResponse.getInt("code") == 3){
+                            Toast.makeText(Login.this,"ERROR: " + jsonResponse.getString("message").toString(),Toast.LENGTH_LONG).show();
+                        }
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                    Toast.makeText(Login.this,"BIENVENIDO: " + username,Toast.LENGTH_LONG).show();
+
                 }
             },
             new Response.ErrorListener() {

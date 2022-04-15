@@ -80,7 +80,7 @@ public class HomeProfesorCursoDetalle extends AppCompatActivity {
 
         StringRequest stringRequest = new StringRequest(
                 Request.Method.POST,
-                Login.API_URL + "profesor/clase",
+                MyUtils.API_URL + "profesor/clase",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
