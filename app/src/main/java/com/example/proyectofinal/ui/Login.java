@@ -42,6 +42,11 @@ public class Login extends AppCompatActivity {
         mQueue = Volley.newRequestQueue(this);
     }
 
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
+
     public void onIniciarSesion(View view){
         String username = edtUsername.getText().toString();
         String password = edtPassword.getText().toString();

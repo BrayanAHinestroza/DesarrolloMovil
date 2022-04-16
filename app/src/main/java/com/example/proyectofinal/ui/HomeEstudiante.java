@@ -13,4 +13,9 @@ public class HomeEstudiante extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_estudiante);
     }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 }

@@ -81,4 +81,9 @@ public class HomeProfesor extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 }
