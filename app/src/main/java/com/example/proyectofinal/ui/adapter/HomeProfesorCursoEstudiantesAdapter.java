@@ -38,7 +38,8 @@ public class HomeProfesorCursoEstudiantesAdapter extends RecyclerView.Adapter<Ho
         try {
             JSONObject data = new JSONObject(list.get(position));
             String nombreUser = data.getString("nombre") + " " + data.getString("apellido");
-            holder.tv_profesor_home_curso_estudiante_nombre.setText(nombreUser);
+            String username = data.getString("codigo") + " - " + nombreUser;
+            holder.tv_profesor_home_curso_estudiante_nombre.setText(username);
             holder.tv_profesor_home_curso_estudiante_id.setText(data.getString("id_usuario"));
         } catch (JSONException e) {
             e.printStackTrace();

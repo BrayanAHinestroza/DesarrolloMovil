@@ -47,6 +47,7 @@ public class CustomClaseProfesorAdapter extends RecyclerView.Adapter<CustomClase
                     try {
                         Intent intent = new Intent(holder.btnHomeProfesorCursoEstudiantes.getContext(), HomeProfesorCursoEstudiantes.class);
                         intent.putExtra("id_curso", data.getString("id_curso"));
+                        intent.putExtra("nombre_curso", data.getString("nombre"));
                         view.getContext().startActivity(intent);
                     } catch (JSONException e) {
                         e.printStackTrace();
