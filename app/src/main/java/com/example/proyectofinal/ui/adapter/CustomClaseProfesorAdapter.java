@@ -5,11 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.proyectofinal.DetalleNovedadProfesor;
 import com.example.proyectofinal.HomeProfesorCursoDetalle;
 import com.example.proyectofinal.HomeProfesorCursoEstudiantes;
 import com.example.proyectofinal.R;
@@ -68,6 +70,19 @@ public class CustomClaseProfesorAdapter extends RecyclerView.Adapter<CustomClase
                 }
             });
 
+            holder.btnListItemHomeProfesorCursoNotifyInactive.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View view) {
+                    try {
+                        Intent intent = new Intent(holder.btnListItemHomeProfesorCursoNotifyInactive.getContext(), DetalleNovedadProfesor.class);
+                        intent.putExtra("id_curso", data.getString("id_curso"));
+                        view.getContext().startActivity(intent);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -81,6 +96,7 @@ public class CustomClaseProfesorAdapter extends RecyclerView.Adapter<CustomClase
     static class MyViewHolder extends RecyclerView.ViewHolder{
         TextView tv_profesor_home_curso_title, tv_profesor_home_curso_nrogrupo;
         Button btnHomeProfesorCursoEstudiantes, btnHomeProfesorCursoDetalle;
+        ImageButton btnListItemHomeProfesorCursoNotifyInactive;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -88,6 +104,7 @@ public class CustomClaseProfesorAdapter extends RecyclerView.Adapter<CustomClase
             tv_profesor_home_curso_nrogrupo=itemView.findViewById(R.id.tv_profesor_home_curso_nrogrupo);
             btnHomeProfesorCursoEstudiantes = itemView.findViewById(R.id.btn_home_profesor_curso_estudiantes);
             btnHomeProfesorCursoDetalle = itemView.findViewById(R.id.btn_home_profesor_curso_detalle);
+            btnListItemHomeProfesorCursoNotifyInactive = itemView.findViewById(R.id.list_item_home_profesor_curso_notify_inactive);
         }
     }
 }

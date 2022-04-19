@@ -18,40 +18,48 @@
         android:theme="@style/Theme.ProyectoFinal"
         android:usesCleartextTraffic="true">
         <activity
-            android:label="SGC - Detalle Estudiante"
-            android:name=".DetalleEstudiante"
+            android:label="SGC - Novedades por Estudiantes"
+            android:name=".DetalleNovedadProfesor"
             android:exported="false" />
         <activity
-            android:label="SGC - Detalle Curso"
+            android:name=".DetalleNovedadEstudiante"
+            android:exported="false"
+            android:label="SGC - Novedades de Estudiante" />
+        <activity
+            android:name=".DetalleEstudiante"
+            android:exported="false"
+            android:label="SGC - Detalle Estudiante" />
+        <activity
             android:name=".HomeProfesorCursoDetalle"
             android:exported="false"
+            android:label="SGC - Detalle Curso"
             android:parentActivityName=".ui.HomeProfesor" />
         <activity
-            android:label="SGC - Listado de Estudiantes"
             android:name=".HomeProfesorCursoEstudiantes"
             android:exported="false"
+            android:label="SGC - Listado de Estudiantes"
             android:parentActivityName=".ui.HomeProfesor" />
         <activity
-            android:label="SGC - Añadir Novedad"
             android:name=".ui.HomeProfesorAddNotify"
             android:exported="false"
+            android:label="SGC - Añadir Novedad"
             android:parentActivityName=".ui.HomeProfesor" />
         <activity
-            android:label="SGC - Página de Inicio"
             android:name=".ui.HomeProfesor"
-            android:exported="false" />
+            android:exported="false"
+            android:label="SGC - Página de Inicio" />
         <activity
-            android:label="SGC - Página de Inicio"
             android:name=".ui.HomeEstudiante"
-            android:exported="false" />
+            android:exported="false"
+            android:label="SGC - Página de Inicio" />
         <activity
-            android:label="SGC - Ingreso"
             android:name=".ui.Login"
-            android:exported="false" />
+            android:exported="false"
+            android:label="SGC - Ingreso" />
         <activity
-            android:label="SGC - Splash"
             android:name=".ui.MainActivity"
             android:exported="true"
+            android:label="SGC - Splash"
             android:noHistory="true"
             android:theme="@style/SplashTheme">
             <intent-filter>

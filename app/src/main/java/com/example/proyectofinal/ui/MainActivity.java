@@ -28,16 +28,20 @@ public class MainActivity extends AppCompatActivity {
         if(fila.moveToFirst()){
             if (fila.getString(1).equals("2")){
                 Intent intent = new Intent(this, HomeEstudiante.class);
+                db.close();
                 startActivity(intent);
             }else if (fila.getString(1).equals("3")){
                 Intent intent = new Intent(this, HomeProfesor.class);
+                db.close();
                 startActivity(intent);
             }else{
                 Intent intent = new Intent(this, Login.class);
+                db.close();
                 startActivity(intent);
             }
         }else{
             Intent intent = new Intent(this, Login.class);
+            db.close();
             startActivity(intent);
         }
     }

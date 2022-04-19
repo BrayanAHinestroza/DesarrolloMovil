@@ -17,7 +17,7 @@ public class MyUtils {
         SQLiteDatabase bd = admin.getWritableDatabase();
 
         bd.insert("auth",null, registro);
-//        bd.close();
+        bd.close();
     }
 
     public static String obtenerToken(Context context){
@@ -29,6 +29,7 @@ public class MyUtils {
         if(fila.moveToFirst()){
             token = fila.getString(0);
         }
+        bd.close();
         return token;
     }
 
@@ -41,6 +42,7 @@ public class MyUtils {
         if(fila.moveToFirst()){
             rol = fila.getString(1);
         }
+        bd.close();
         return rol;
     }
 
@@ -53,6 +55,7 @@ public class MyUtils {
         if(fila.moveToFirst()){
             username = fila.getString(2);
         }
+        bd.close();
         return username;
     }
 }
