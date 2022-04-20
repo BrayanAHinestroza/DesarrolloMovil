@@ -20,6 +20,9 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.proyectofinal.MyUtils;
 import com.example.proyectofinal.R;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -47,17 +50,17 @@ public class Login extends AppCompatActivity {
         finish();
     }
 
-    public void onIniciarSesion(View view){
+    public void onIniciarSesion(View view) {
         String username = edtUsername.getText().toString();
         String password = edtPassword.getText().toString();
 
         JSONObject response = validarDatos(username, password);
 
         try {
-            if (response.getBoolean("status")){
+            if (response.getBoolean("status")) {
                 iniciarSesion(username, password);
-            }else{
-                Toast.makeText(Login.this,"ERROR: " + response.getString("message").toString(),Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(Login.this, "ERROR: " + response.getString("message").toString(), Toast.LENGTH_LONG).show();
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -65,95 +68,110 @@ public class Login extends AppCompatActivity {
     }
 
     public void iniciarSesion(String username, String password) throws JSONException {
-        JSONObject data = new JSONObject();
+        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(new OnSuccessListener<InstanceIdResult>() {
+            @Override
+            public void onSuccess(InstanceIdResult instanceIdResult) {
+                String firebaseToken = instanceIdResult.getToken().toString();
+                System.out.println("TOKEEEEN ->>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                System.out.println(firebaseToken);
 
-        data.put("username", username);
-        data.put("password", password);
-        final String requestBody = data.toString();
+                JSONObject data = new JSONObject();
 
-        StringRequest stringRequest = new StringRequest(
-            Request.Method.POST,
-                MyUtils.API_URL + "Login",
-            new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    try {
-                        JSONObject jsonResponse = new JSONObject(response);
+                try {
+                    data.put("username", username);
+                    data.put("password", password);
+                    data.put("firebaseToken", firebaseToken);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
-                        if (jsonResponse.getInt("code") == 1) {
-                            String rol = jsonResponse.getString("roles_id").toString();
-                            String token = jsonResponse.getString("token").toString();
+                final String requestBody = data.toString();
 
-                            ContentValues registro = new ContentValues();
-                            registro.put("rol", rol);
-                            registro.put("token", token);
-                            registro.put("username", username.toUpperCase());
-                            MyUtils.guardarEnBaseDeDatos(Login.this, registro);
+                StringRequest stringRequest = new StringRequest(
+                        Request.Method.POST,
+                        MyUtils.API_URL + "Login",
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                try {
+                                    JSONObject jsonResponse = new JSONObject(response);
 
-                            if (rol.equals("2")){
-                                Intent intent = new Intent(Login.this, HomeEstudiante.class);
-                                startActivity(intent);
-                            }else if (rol.equals("3")){
-                                Intent intent = new Intent(Login.this, HomeProfesor.class);
-                                startActivity(intent);
+                                    if (jsonResponse.getInt("code") == 1) {
+                                        String rol = jsonResponse.getString("roles_id").toString();
+                                        String token = jsonResponse.getString("token").toString();
+
+                                        ContentValues registro = new ContentValues();
+                                        registro.put("rol", rol);
+                                        registro.put("token", token);
+                                        registro.put("username", username.toUpperCase());
+                                        MyUtils.guardarEnBaseDeDatos(Login.this, registro);
+
+                                        if (rol.equals("2")) {
+                                            Intent intent = new Intent(Login.this, HomeEstudiante.class);
+                                            startActivity(intent);
+                                        } else if (rol.equals("3")) {
+                                            Intent intent = new Intent(Login.this, HomeProfesor.class);
+                                            startActivity(intent);
+                                        }
+                                        Toast.makeText(Login.this, "BIENVENIDO: " + username, Toast.LENGTH_LONG).show();
+                                    }
+
+                                    if (jsonResponse.getInt("code") == 2) {
+                                        Toast.makeText(Login.this, "ERROR: " + jsonResponse.getString("message").toString(), Toast.LENGTH_LONG).show();
+                                    }
+
+                                    if (jsonResponse.getInt("code") == 3) {
+                                        Toast.makeText(Login.this, "ERROR: " + jsonResponse.getString("message").toString(), Toast.LENGTH_LONG).show();
+                                    }
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
                             }
-                            Toast.makeText(Login.this,"BIENVENIDO: " + username,Toast.LENGTH_LONG).show();
-                        }
-
-                        if (jsonResponse.getInt("code") == 2){
-                            Toast.makeText(Login.this,"ERROR: " + jsonResponse.getString("message").toString(),Toast.LENGTH_LONG).show();
-                        }
-
-                        if (jsonResponse.getInt("code") == 3){
-                            Toast.makeText(Login.this,"ERROR: " + jsonResponse.getString("message").toString(),Toast.LENGTH_LONG).show();
-                        }
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Log.e("LOG_VOLLEY", error.toString());
+                                Toast.makeText(Login.this, error.toString(), Toast.LENGTH_LONG).show();
+                            }
+                        }) {
+                    @Override
+                    public String getBodyContentType() {
+                        return "application/json; charset=utf-8";
                     }
 
-                }
-            },
-            new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Log.e("LOG_VOLLEY", error.toString());
-                    Toast.makeText(Login.this,error.toString(),Toast.LENGTH_LONG).show();
-                }
-            }) {
-            @Override
-            public String getBodyContentType() {
-                return "application/json; charset=utf-8";
-            }
+                    @Override
+                    public byte[] getBody() throws AuthFailureError {
+                        try {
+                            return requestBody == null ? null : requestBody.getBytes("utf-8");
+                        } catch (UnsupportedEncodingException uee) {
+                            VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", requestBody, "utf-8");
+                            return null;
+                        }
+                    }
+                };
 
-            @Override
-            public byte[] getBody() throws AuthFailureError {
-                try {
-                    return requestBody == null ? null : requestBody.getBytes("utf-8");
-                } catch (UnsupportedEncodingException uee) {
-                    VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", requestBody, "utf-8");
-                    return null;
-                }
+                mQueue.add(stringRequest);
             }
-        };
-
-        mQueue.add(stringRequest);
+        });
     }
 
-    public JSONObject validarDatos(String username, String password){
+    public JSONObject validarDatos(String username, String password) {
         JSONObject response = new JSONObject();
 
         if (username.equals("") || password.equals("")) {
             try {
                 response.put("status", false);
-                response.put("message","Los campos username y password son obligatorios");
+                response.put("message", "Los campos username y password son obligatorios");
                 return response;
-            }catch (Exception ex){
+            } catch (Exception ex) {
                 System.out.println(ex);
             }
         }
 
-        if (!password.equals("")){
+        if (!password.equals("")) {
             /*
              * ^ represents starting character of the string.
              * (?=.*[0-9]) represents a digit must occur at least once.
@@ -168,17 +186,17 @@ public class Login extends AppCompatActivity {
             Matcher m = p.matcher(password);
 
             try {
-                if (!m.matches()){
+                if (!m.matches()) {
                     response.put("status", false);
-                    response.put("message","La contraseña no es valida");
+                    response.put("message", "La contraseña no es valida");
                     return response;
                 }
-            }catch (Exception ex){
+            } catch (Exception ex) {
                 System.out.println(ex);
             }
         }
 
-        if (!username.equals("")){
+        if (!username.equals("")) {
             /*
              * ^ represents starting character of the string.
              * ([0-9]) represents a digit.
@@ -193,19 +211,19 @@ public class Login extends AppCompatActivity {
             Matcher m = p.matcher(username);
 
             try {
-                if (!m.matches()){
+                if (!m.matches()) {
                     response.put("status", false);
-                    response.put("message","El username no es valida");
+                    response.put("message", "El username no es valida");
                     return response;
                 }
-            }catch (Exception ex){
+            } catch (Exception ex) {
                 System.out.println(ex);
             }
         }
 
         try {
             response.put("status", true);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             System.out.println(ex);
         }
         return response;

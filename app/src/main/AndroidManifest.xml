@@ -17,6 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProyectoFinal"
         android:usesCleartextTraffic="true">
+
         <activity
             android:label="SGC - Novedades por Estudiantes"
             android:name=".DetalleNovedadProfesor"
@@ -69,6 +70,13 @@
             </intent-filter>
         </activity>
 
+        <service
+            android:name=".io.PushNotificationService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />

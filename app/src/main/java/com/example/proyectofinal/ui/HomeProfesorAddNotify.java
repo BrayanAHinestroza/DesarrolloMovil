@@ -158,7 +158,7 @@ public class HomeProfesorAddNotify extends AppCompatActivity {
                         @Override
                         public void onResponse(String response) {
                             Intent intent = new Intent(HomeProfesorAddNotify.this, HomeProfesor.class);
-                            startActivity(intent);                            
+                            startActivity(intent);
                             Toast.makeText(HomeProfesorAddNotify.this,"CREADO CORRECTAMENTE",Toast.LENGTH_LONG).show();
                         }
                     },
