@@ -11,12 +11,12 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE auth (token text, rol text, username text )");
+        db.execSQL("CREATE TABLE auth (token text, rol text, username text, saveSession integer )");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS auth");
-        db.execSQL("CREATE TABLE auth (token text, rol text, username text )");
+        db.execSQL("CREATE TABLE auth (token text, rol text, username text, saveSession integer )");
     }
 }

@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -33,6 +34,7 @@ import java.util.regex.Pattern;
 
 public class Login extends AppCompatActivity {
     private EditText edtUsername, edtPassword;
+    private CheckBox chSesion;
     private RequestQueue mQueue;
 
     @Override
@@ -42,6 +44,7 @@ public class Login extends AppCompatActivity {
 
         edtUsername = (EditText) findViewById(R.id.edt_username);
         edtPassword = (EditText) findViewById(R.id.edt_password);
+        chSesion = (CheckBox) findViewById(R.id.ch_sesion);
         mQueue = Volley.newRequestQueue(this);
     }
 
@@ -72,9 +75,6 @@ public class Login extends AppCompatActivity {
             @Override
             public void onSuccess(InstanceIdResult instanceIdResult) {
                 String firebaseToken = instanceIdResult.getToken().toString();
-                System.out.println("TOKEEEEN ->>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-                System.out.println(firebaseToken);
-
                 JSONObject data = new JSONObject();
 
                 try {
@@ -104,6 +104,7 @@ public class Login extends AppCompatActivity {
                                         registro.put("rol", rol);
                                         registro.put("token", token);
                                         registro.put("username", username.toUpperCase());
+                                        registro.put("saveSession", chSesion.isChecked());
                                         MyUtils.guardarEnBaseDeDatos(Login.this, registro);
 
                                         if (rol.equals("2")) {
