@@ -85,30 +85,31 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
 
         </androidx.recyclerview.widget.RecyclerView>
+
+        <Button
+            android:id="@+id/btn_home_profesor_curso_estudiantes_novedades"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="16dp"
+            android:layout_alignRight="@+id/recyclerViewHomeProfesorCursoEstudiantes"
+            android:layout_below="@+id/recyclerViewHomeProfesorCursoEstudiantes"
+            android:onClick="onChangeToEstudiantes"
+            android:text="Novedades" />
+
+        <Button
+            android:id="@+id/btn_home_profesor_curso_estudiantes_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="16dp"
+            android:layout_alignRight="@+id/recyclerViewHomeProfesorCursoEstudiantes"
+            android:layout_below="@+id/recyclerViewHomeProfesorCursoEstudiantes"
+            android:onClick="onChangeToNovedades"
+            android:text="Estudiantes"
+            android:visibility="gone" />
+
     </RelativeLayout>
-
-    <Button
-        android:id="@+id/btn_home_profesor_curso_estudiantes_novedades"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="16dp"
-        android:onClick="onChangeToEstudiantes"
-        android:text="Novedades"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <Button
-        android:id="@+id/btn_home_profesor_curso_estudiantes_all"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="16dp"
-        android:onClick="onChangeToNovedades"
-        android:text="Estudiantes"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
     <ProgressBar
         android:id="@+id/progressBarListadoEstudiantes"
