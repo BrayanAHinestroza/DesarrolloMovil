@@ -23,10 +23,6 @@
             android:name=".DetalleNovedadProfesor"
             android:exported="false" />
         <activity
-            android:name=".DetalleNovedadEstudiante"
-            android:exported="false"
-            android:label="SGC - Novedades de Estudiante" />
-        <activity
             android:name=".DetalleEstudiante"
             android:exported="false"
             android:label="SGC - Detalle Estudiante" />

@@ -25,6 +25,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.proyectofinal.ui.Login;
 import com.example.proyectofinal.ui.adapter.CustomNotifyProfesorAdapter;
 import com.example.proyectofinal.ui.adapter.HomeProfesorCursoEstudiantesAdapter;
+import com.example.proyectofinal.ui.adapter.HomeProfesorCursoNovedadesEstudiantesAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,6 +42,7 @@ public class HomeProfesorCursoEstudiantes extends AppCompatActivity {
     Button btn_home_profesor_curso_estudiantes_novedades, btn_home_profesor_curso_estudiantes_all;
     private RecyclerView estudiantesRecyclerView;
     private HomeProfesorCursoEstudiantesAdapter.RecyclerViewClickListener listener;
+    private HomeProfesorCursoNovedadesEstudiantesAdapter.RecyclerViewClickListener listenerNov;
     public ArrayList<String> estudiantes = new ArrayList<>();
 
     @Override
@@ -200,7 +202,7 @@ public class HomeProfesorCursoEstudiantes extends AppCompatActivity {
                                     estudiantes.add(jsonResponse.getString(i));
                                 }
                                 setOnClickListener();
-                                estudiantesRecyclerView.setAdapter(new HomeProfesorCursoEstudiantesAdapter(estudiantes, listener));
+                                estudiantesRecyclerView.setAdapter(new HomeProfesorCursoNovedadesEstudiantesAdapter(estudiantes, listenerNov));
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -244,9 +246,21 @@ public class HomeProfesorCursoEstudiantes extends AppCompatActivity {
             public void onClick(View v, int position) {
                 // Valida cual boton esta visible para asi redirigir al detalle estudiante o novedades
                 if (btn_home_profesor_curso_estudiantes_all.getVisibility() == View.VISIBLE){
-                    Intent intent = new Intent(getApplicationContext(), DetalleNovedadEstudiante.class);
+
+                }else{
+                    Intent intent = new Intent(getApplicationContext(), DetalleEstudiante.class);
                     intent.putExtra("id_estudiante",estudiantes.get(position));
                     startActivity(intent);
+                }
+            }
+        };
+
+        listenerNov = new HomeProfesorCursoNovedadesEstudiantesAdapter.RecyclerViewClickListener() {
+            @Override
+            public void onClick(View v, int position) {
+                // Valida cual boton esta visible para asi redirigir al detalle estudiante o novedades
+                if (btn_home_profesor_curso_estudiantes_all.getVisibility() == View.VISIBLE){
+
                 }else{
                     Intent intent = new Intent(getApplicationContext(), DetalleEstudiante.class);
                     intent.putExtra("id_estudiante",estudiantes.get(position));
