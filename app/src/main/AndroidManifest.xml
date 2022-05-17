@@ -17,11 +17,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProyectoFinal"
         android:usesCleartextTraffic="true">
-
         <activity
-            android:label="SGC - Novedades por Estudiantes"
-            android:name=".DetalleNovedadProfesor"
+            android:name=".QR_Scanner"
             android:exported="false" />
+        <activity
+            android:name=".ProfesorEventosEstudiantes"
+            android:exported="false" />
+        <activity
+            android:name=".DetalleNovedadProfesor"
+            android:exported="false"
+            android:label="SGC - Novedades por Estudiantes" />
         <activity
             android:name=".DetalleEstudiante"
             android:exported="false"
@@ -70,9 +75,10 @@
             android:name=".io.PushNotificationService"
             android:exported="false">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
+
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />

@@ -3,7 +3,7 @@ package com.example.proyectofinal.ui;
 import com.example.proyectofinal.MyUtils;
 import com.example.proyectofinal.ui.fragment.CursosProfesorFragment;
 import com.example.proyectofinal.ui.fragment.NotifyProfesorFragment;
-import com.example.proyectofinal.ui.fragment.HomeProfesorFragment;
+import com.example.proyectofinal.ui.fragment.EventosProfesorFragment;
 import com.example.proyectofinal.R;
 import com.google.android.material.tabs.TabLayout;
 import androidx.fragment.app.Fragment;
@@ -60,7 +60,7 @@ public class HomeProfesor extends AppCompatActivity {
                         fragment = new CursosProfesorFragment();
                         break;
                     case 2:
-                        fragment = new HomeProfesorFragment();
+                        fragment = new EventosProfesorFragment();
                         break;
                 }
                 FragmentManager fm = getSupportFragmentManager();
