@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 public class EventsMapBox extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -15,8 +14,6 @@ public class EventsMapBox extends AppCompatActivity {
         Intent myIntent = getIntent();
         String latitud = myIntent.getStringExtra("lat");
         String longitud = myIntent.getStringExtra("long");
-
-
 
 
     }
