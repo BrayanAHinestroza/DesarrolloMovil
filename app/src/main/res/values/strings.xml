@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Sistema de Gestion de Cursos</string>
+    <string name="mapbox_access_token">pk.eyJ1Ijoic2FudGlhZ29tYXJtb2xlam8iLCJhIjoiY2wzZjhsdWs5MDF6MjNsbXNoaWFtZmN2YiJ9._GczdUSNNZWvO8rTTMWFng</string>
 </resources>
