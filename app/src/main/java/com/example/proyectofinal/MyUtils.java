@@ -9,7 +9,7 @@ import com.example.proyectofinal.io.AdminSQLiteOpenHelper;
 
 public class MyUtils {
 
-    public static final String API_URL = "http://192.168.1.98:5000/";
+    public static final String API_URL = "http://192.168.1.2:3300/";
 
 
     public static void guardarEnBaseDeDatos(Context context, ContentValues registro) {
